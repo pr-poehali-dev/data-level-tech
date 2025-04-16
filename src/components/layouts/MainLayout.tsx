@@ -1,68 +1,127 @@
-import { ReactNode } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sidebar } from '@/components/ui/sidebar';
+import { 
+  Cable, 
+  Waves, 
+  Rss, 
+  Zap,
+  GitCompare, 
+  BrainCircuit, 
+  ListChecks, 
+  BookText, 
+  Globe,
+  Menu,
+  X,
+  Home
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Home, Zap, Cpu, Radio, Waves, Network, FileCog, GitCompare, BookText, BrainCircuit, ListChecks } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
+import { useMobile } from '@/hooks/use-mobile';
 
-interface MainLayoutProps {
-  children: ReactNode;
+interface SidebarLink {
+  title: string;
+  href: string;
+  icon: React.ReactNode;
 }
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const isMobile = useMobile();
+  const [open, setOpen] = useState(false);
   
-  const menuItems = [
-    { path: '/', label: 'Главная', icon: <Home className="h-5 w-5" /> },
-    { path: '/copper', label: 'Медные кабели', icon: <Zap className="h-5 w-5" /> },
-    { path: '/fiber', label: 'Оптоволокно', icon: <Waves className="h-5 w-5" /> },
-    { path: '/wireless', label: 'Беспроводные технологии', icon: <Radio className="h-5 w-5" /> },
-    { path: '/modulation', label: 'Методы модуляции', icon: <Cpu className="h-5 w-5" /> },
-    { path: '/ethernet', label: 'Технологии Ethernet', icon: <Network className="h-5 w-5" /> },
-    { path: '/protocols', label: 'Протоколы физического уровня', icon: <FileCog className="h-5 w-5" /> },
-    { path: '/encoding', label: 'Кодирование данных', icon: <GitCompare className="h-5 w-5" /> },
-    { path: '/technologies', label: 'Современные технологии', icon: <BrainCircuit className="h-5 w-5" /> },
-    { path: '/glossary', label: 'Справочник терминов', icon: <BookText className="h-5 w-5" /> },
-    { path: '/quiz', label: 'Тест по технологиям', icon: <ListChecks className="h-5 w-5" /> },
+  const sidebarLinks: SidebarLink[] = [
+    { title: 'Главная', href: '/', icon: <Home className="h-5 w-5" /> },
+    { title: 'Медные технологии', href: '/copper', icon: <Cable className="h-5 w-5" /> },
+    { title: 'Оптоволоконные технологии', href: '/fiber', icon: <Waves className="h-5 w-5" /> },
+    { title: 'Беспроводные технологии', href: '/wireless', icon: <Rss className="h-5 w-5" /> },
+    { title: 'Модуляция', href: '/modulation', icon: <Zap className="h-5 w-5" /> },
+    { title: 'Кодирование данных', href: '/encoding', icon: <GitCompare className="h-5 w-5" /> },
+    { title: 'Сетевые протоколы', href: '/protocols', icon: <Globe className="h-5 w-5" /> },
+    { title: 'Современные технологии', href: '/technologies', icon: <BrainCircuit className="h-5 w-5" /> },
+    { title: 'Проверка знаний', href: '/quiz', icon: <ListChecks className="h-5 w-5" /> },
+    { title: 'Справочник терминов', href: '/glossary', icon: <BookText className="h-5 w-5" /> },
   ];
-
+  
+  const renderLinks = () => (
+    <nav className="space-y-1">
+      {sidebarLinks.map((link, index) => (
+        <Link
+          key={index}
+          to={link.href}
+          className={cn(
+            "flex items-center gap-3 rounded-lg px-3 py-2 text-base transition-colors",
+            link.href === location.pathname
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted"
+          )}
+          onClick={() => setOpen(false)}
+        >
+          {link.icon}
+          {link.title}
+        </Link>
+      ))}
+    </nav>
+  );
+  
   return (
-    <div className="flex min-h-screen">
-      <Sidebar className="hidden lg:block w-64 border-r">
-        <div className="py-4">
-          <div className="px-3 py-2">
-            <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight text-sidebar-foreground">
-              Навигация
-            </h2>
-            <div className="space-y-1">
-              {menuItems.map((item) => (
-                <Button
-                  key={item.path}
-                  variant={location.pathname === item.path ? "secondary" : "ghost"}
-                  size="sm"
-                  className="w-full justify-start"
-                  asChild
-                >
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span className="ml-2">{item.label}</span>
-                  </Link>
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Link to="/" className="font-bold text-lg">
+              Технологии физического уровня
+            </Link>
+          </div>
+          
+          {isMobile ? (
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Открыть меню</span>
                 </Button>
-              ))}
-            </div>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[80%] max-w-sm">
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="font-bold text-lg">Навигация</div>
+                    <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+                      <X className="h-5 w-5" />
+                      <span className="sr-only">Закрыть</span>
+                    </Button>
+                  </div>
+                  <Separator className="mb-4" />
+                  {renderLinks()}
+                </div>
+              </SheetContent>
+            </Sheet>
+          ) : null}
+        </div>
+      </header>
+      
+      <div className="flex-1 flex">
+        {!isMobile && (
+          <aside className="hidden md:flex w-64 flex-col border-r bg-muted/40 pt-6">
+            <div className="px-3">{renderLinks()}</div>
+          </aside>
+        )}
+        
+        <main className="flex-1 py-6 px-4 md:px-6 overflow-y-auto">
+          <div className="container mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
+      
+      <footer className="border-t py-4 bg-muted/40">
+        <div className="container">
+          <div className="text-center text-muted-foreground text-sm">
+            &copy; {new Date().getFullYear()} Технологии физического уровня передачи данных
           </div>
         </div>
-      </Sidebar>
-      <div className="flex-1 overflow-auto">
-        <header className="border-b bg-card px-4 py-3 lg:hidden flex items-center justify-between">
-          <h1 className="text-lg font-bold">Технологии физического уровня передачи данных</h1>
-        </header>
-        <main className="container py-6 px-4">
-          {children}
-        </main>
-        <footer className="border-t bg-muted px-4 py-6 text-center text-sm text-muted-foreground">
-          <p>© 2024 Технологии физического уровня передачи данных</p>
-        </footer>
-      </div>
+      </footer>
     </div>
   );
 };

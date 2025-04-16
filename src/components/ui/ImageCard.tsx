@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui/card';
 
 interface ImageCardProps {
   imageSrc: string;
@@ -9,24 +10,20 @@ interface ImageCardProps {
 
 const ImageCard = ({ imageSrc, alt, caption, className }: ImageCardProps) => {
   return (
-    <figure className={cn("overflow-hidden rounded-lg border bg-card", className)}>
-      <div className="relative aspect-video overflow-hidden">
-        <img 
-          src={imageSrc} 
-          alt={alt} 
-          className="h-full w-full object-cover transition-all hover:scale-105"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "/placeholder.svg";
-          }}
+    <Card className={cn("overflow-hidden", className)}>
+      <div className="aspect-video relative">
+        <img
+          src={imageSrc}
+          alt={alt}
+          className="object-cover w-full h-full"
         />
       </div>
       {caption && (
-        <figcaption className="p-3 text-center text-sm text-muted-foreground">
+        <div className="p-3 text-sm text-muted-foreground text-center">
           {caption}
-        </figcaption>
+        </div>
       )}
-    </figure>
+    </Card>
   );
 };
 

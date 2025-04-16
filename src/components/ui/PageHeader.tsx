@@ -1,19 +1,27 @@
-import { ReactNode } from 'react';
+import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
   title: string;
   description?: string;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
+  className?: string;
 }
 
-const PageHeader = ({ title, description, icon }: PageHeaderProps) => {
+const PageHeader = ({
+  title,
+  description,
+  icon,
+  className,
+}: PageHeaderProps) => {
   return (
-    <div className="flex flex-col space-y-2 mb-8 border-b pb-4">
-      <div className="flex items-center space-x-2">
+    <div className={cn("mb-8", className)}>
+      <div className="flex items-center gap-2 mb-2">
         {icon && <div className="text-primary">{icon}</div>}
-        <h1 className="text-heading font-bold tracking-tight">{title}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
       </div>
-      {description && <p className="text-muted-foreground">{description}</p>}
+      {description && (
+        <p className="text-muted-foreground text-lg">{description}</p>
+      )}
     </div>
   );
 };

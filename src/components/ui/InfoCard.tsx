@@ -1,30 +1,23 @@
-import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface InfoCardProps {
   title: string;
-  description?: string;
-  children: ReactNode;
-  icon?: ReactNode;
+  children: React.ReactNode;
+  icon?: React.ReactNode;
   className?: string;
 }
 
-const InfoCard = ({ title, description, children, icon, className }: InfoCardProps) => {
+const InfoCard = ({ title, children, icon, className }: InfoCardProps) => {
   return (
-    <Card className={cn("overflow-hidden", className)}>
-      <CardHeader className={cn("flex flex-row items-center gap-2", 
-        icon ? "bg-primary/5" : "")}>
+    <div className={cn("rounded-lg border p-4", className)}>
+      <div className="flex items-center gap-2 mb-2">
         {icon && <div className="text-primary">{icon}</div>}
-        <div>
-          <CardTitle>{title}</CardTitle>
-          {description && <CardDescription>{description}</CardDescription>}
-        </div>
-      </CardHeader>
-      <CardContent className="p-6">
+        <h3 className="font-semibold">{title}</h3>
+      </div>
+      <div>
         {children}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

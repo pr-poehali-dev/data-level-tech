@@ -1,110 +1,204 @@
+import { Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Home, ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import InfoCard from '@/components/ui/InfoCard';
-import { Zap, Waves, Radio, Network } from 'lucide-react';
 import ImageCard from '@/components/ui/ImageCard';
+import { 
+  Cable, 
+  Waves, 
+  Rss, 
+  Zap,
+  BookOpen, 
+  GitCompare, 
+  BrainCircuit, 
+  ListChecks, 
+  BookText, 
+  Globe 
+} from 'lucide-react';
 
 const HomePage = () => {
   return (
     <div>
       <PageHeader 
         title="Технологии физического уровня передачи данных" 
-        description="Добро пожаловать на образовательный портал, посвященный технологиям физического уровня передачи данных"
+        description="Изучение фундаментальных принципов и современных технологий передачи информации"
         icon={<Home className="h-6 w-6" />}
       />
-      
-      <div className="grid gap-6 md:grid-cols-2">
+
+      <div className="grid gap-6 md:grid-cols-2 mb-8">
         <ImageCard 
           imageSrc="/placeholder.svg" 
-          alt="Технологии передачи данных"
-          caption="Физический уровень является первым уровнем модели OSI"
-          className="md:col-span-2"
+          alt="Физический уровень передачи данных"
+          caption="Многообразие технологий физического уровня передачи данных"
         />
-        
+
         <div className="prose max-w-none">
           <p>
-            Физический уровень (Physical Layer) — первый уровень сетевой модели OSI, отвечающий за физическую передачу битов 
-            по каналу связи. На этом уровне определяются электрические, механические, процедурные и функциональные 
-            спецификации для активации, поддержания и деактивации физического соединения между системами.
+            Физический уровень является первым и самым нижним уровнем модели OSI, представляя собой фундамент
+            для всех сетевых коммуникаций. Именно на этом уровне происходит преобразование цифровых данных
+            в сигналы, которые могут быть переданы по физическим средам связи.
           </p>
           <p>
-            На нашем портале вы найдете подробную информацию о различных технологиях физического уровня, включая:
+            Наш сайт посвящен всестороннему изучению технологий, используемых на физическом уровне, 
+            от классических проводных сред до современных беспроводных технологий и перспективных 
+            квантовых коммуникаций. Здесь вы найдете информацию о принципах передачи данных, методах 
+            кодирования и модуляции, современных стандартах и будущих направлениях развития.
           </p>
-          <ul>
-            <li>Проводные технологии передачи данных</li>
-            <li>Оптоволоконные технологии</li>
-            <li>Беспроводные технологии передачи данных</li>
-            <li>Методы модуляции и кодирования сигналов</li>
-            <li>Протоколы физического уровня</li>
-          </ul>
-        </div>
-        
-        <div className="grid gap-4 content-start">
-          <InfoCard
-            title="Изучайте физический уровень"
-            description="Базовые концепции и технологии"
-            icon={<Zap className="h-5 w-5" />}
-          >
-            <p>На нашем портале вы найдете подробные материалы по всем аспектам физического уровня сетевой модели OSI.</p>
-            <Button asChild className="mt-2">
-              <Link to="/glossary">Открыть справочник <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
-          </InfoCard>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <InfoCard
-              title="Проверьте знания"
-              icon={<Network className="h-5 w-5" />}
-            >
-              <Button asChild variant="outline" className="w-full">
-                <Link to="/quiz">Пройти тест</Link>
-              </Button>
-            </InfoCard>
-            
-            <InfoCard
-              title="Технологии"
-              icon={<Waves className="h-5 w-5" />}
-            >
-              <Button asChild variant="outline" className="w-full">
-                <Link to="/technologies">Изучить</Link>
-              </Button>
-            </InfoCard>
-          </div>
+          <p>
+            Независимо от того, являетесь ли вы студентом, инженером или просто интересуетесь 
+            технологиями связи, этот ресурс поможет вам углубить понимание того, как работает 
+            передача данных на самом базовом уровне.
+          </p>
         </div>
       </div>
+
+      <h2 className="text-2xl font-bold tracking-tight mb-6">Разделы сайта</h2>
       
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <InfoCard
-          title="Медные кабели"
-          icon={<Zap className="h-5 w-5" />}
-        >
-          <p>Изучите технологии передачи данных по медным проводникам, включая витую пару и коаксиальный кабель.</p>
-          <Button asChild variant="outline" className="mt-2 w-full">
-            <Link to="/copper">Подробнее</Link>
-          </Button>
-        </InfoCard>
-        
-        <InfoCard
-          title="Оптоволокно"
-          icon={<Waves className="h-5 w-5" />}
-        >
-          <p>Познакомьтесь с принципами передачи данных по оптическому волокну и современными оптическими технологиями.</p>
-          <Button asChild variant="outline" className="mt-2 w-full">
-            <Link to="/fiber">Подробнее</Link>
-          </Button>
-        </InfoCard>
-        
-        <InfoCard
-          title="Беспроводные технологии"
-          icon={<Radio className="h-5 w-5" />}
-        >
-          <p>Изучите принципы беспроводной передачи данных, технологии Wi-Fi, Bluetooth, 5G и другие.</p>
-          <Button asChild variant="outline" className="mt-2 w-full">
-            <Link to="/wireless">Подробнее</Link>
-          </Button>
-        </InfoCard>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Cable className="h-5 w-5 text-primary" />
+              Медные технологии
+            </CardTitle>
+            <CardDescription>Передача данных по медным кабелям</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Технологии передачи данных по медным проводникам: витая пара, коаксиальный кабель, DSL и другие.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/copper">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Waves className="h-5 w-5 text-primary" />
+              Оптоволоконные технологии
+            </CardTitle>
+            <CardDescription>Передача данных по оптическим волокнам</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Принципы и технологии передачи данных по оптическим волокнам, типы волокон, WDM и другие методы.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/fiber">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Rss className="h-5 w-5 text-primary" />
+              Беспроводные технологии
+            </CardTitle>
+            <CardDescription>Передача данных в беспроводных сетях</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Wi-Fi, сотовая связь, спутниковая связь и другие беспроводные технологии передачи данных.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/wireless">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="h-5 w-5 text-primary" />
+              Модуляция
+            </CardTitle>
+            <CardDescription>Методы модуляции сигналов</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Амплитудная, частотная и фазовая модуляция, OFDM, QAM и другие методы модуляции сигналов.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/modulation">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <GitCompare className="h-5 w-5 text-primary" />
+              Кодирование данных
+            </CardTitle>
+            <CardDescription>Методы кодирования на физическом уровне</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Линейное кодирование, блочное кодирование, обнаружение и исправление ошибок при передаче.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/encoding">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-5 w-5 text-primary" />
+              Сетевые протоколы
+            </CardTitle>
+            <CardDescription>Протоколы физического уровня</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Ethernet, SONET/SDH, USB, PCIe и другие протоколы, действующие на физическом уровне.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/protocols">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <BrainCircuit className="h-5 w-5 text-primary" />
+              Современные технологии
+            </CardTitle>
+            <CardDescription>Новейшие разработки</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Последние достижения и перспективные направления развития технологий физического уровня.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/technologies">Подробнее</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <ListChecks className="h-5 w-5 text-primary" />
+              Тестирование знаний
+            </CardTitle>
+            <CardDescription>Проверьте свои знания</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Тесты для проверки знаний о технологиях физического уровня передачи данных.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/quiz">Пройти тест</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <BookText className="h-5 w-5 text-primary" />
+              Справочник терминов
+            </CardTitle>
+            <CardDescription>Глоссарий специальных терминов</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">Справочник терминов и понятий, используемых в технологиях физического уровня.</p>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/glossary">Открыть справочник</Link>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
